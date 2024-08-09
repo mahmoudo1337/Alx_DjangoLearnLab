@@ -1,6 +1,7 @@
 ### Delete Operation
 
 ```python
+from bookshelf.models import Book
 # Delete the book
 retrieved_book.delete()
 
