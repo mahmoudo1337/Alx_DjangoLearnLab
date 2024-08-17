@@ -1,10 +1,10 @@
 from django.shortcuts import render
-
-# Create your views here.
 from django.http import HttpResponse
 from .models import Book
 from django.views.generic import DetailView
 from .models import Library
+
+# Create your views here.
 
 def book_list_view(request):
     books = Book.objects.all()
