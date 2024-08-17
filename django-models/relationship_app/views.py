@@ -8,8 +8,7 @@ from django.views.generic.detail import DetailView
 
 def book_list_view(request):
     books = Book.objects.all()
-    book_list = "\n".join([f"{book.title} by {book.author.name}" for book in books])
-    return HttpResponse(f"Books in the library:\n{book_list}")
+    return render(request, 'relationship_app/list_books.html', {'books': books})
 
 class LibraryDetailView(DetailView):
     model = Library
