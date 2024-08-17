@@ -4,6 +4,11 @@ from .models import Book
 from django.views.generic import DetailView
 from .models import Library
 from django.views.generic.detail import DetailView
+from django.contrib.auth.views import LoginView, LogoutView
+from django.urls import reverse_lazy
+from django.contrib.auth.forms import UserCreationForm
+from django.views.generic import CreateView
+
 # Create your views here.
 
 def book_list_view(request):
@@ -19,4 +24,17 @@ class LibraryListView(DetailView):
     model = Library
     template_name = 'relationship_app/list_books.html'
     context_object_name = 'library'
-    
+
+
+class UserLoginView(LoginView):
+    template_name = 'relationship_app/login.html'
+
+# Logout view (using built-in LogoutView)
+class UserLogoutView(LogoutView):
+    template_name = 'relationship_app/logout.html'
+
+# Registration view (using generic CreateView and built-in UserCreationForm)
+class UserRegisterView(CreateView):
+    form_class = UserCreationForm
+    template_name = 'relationship_app/register.html'
+    success_url = reverse_lazy('login')
