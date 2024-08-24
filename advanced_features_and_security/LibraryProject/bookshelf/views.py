@@ -51,3 +51,8 @@ def delete_book(request, pk):
 
 
 #books
+
+def search_books(request):
+    query = request.GET.get('q')
+    results = Book.objects.filter(title__icontains=query)
+    return render(request, 'bookshelf/book_list.html', {'results': results})
