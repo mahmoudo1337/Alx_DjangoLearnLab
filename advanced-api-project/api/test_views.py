@@ -84,3 +84,5 @@ class AuthenticatedBookAPITests(APITestCase):
 
         response = self.client.post(reverse('book-list'), book_data, format='json')
         self.assertEqual(response.status_code, status.HTTP_201_CREATED)
+
+#self.client.login
