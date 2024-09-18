@@ -158,3 +158,4 @@ DATABASES = {
 import os
 
 SECRET_KEY = os.getenv('DJANGO_SECRET_KEY', 'default-secret-key')
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
