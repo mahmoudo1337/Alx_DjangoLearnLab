@@ -132,3 +132,19 @@ TEMPLATES = [
 # https://docs.djangoproject.com/en/5.1/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+
+#POSTGRESQL:
+
+# django_blog/settings.py
+
+#DATABASES = {
+#    'default': {
+#        'ENGINE': 'django.db.backends.postgresql',
+#        'NAME': 'your_db_name',
+#        'USER': 'your_db_user',
+#        'PASSWORD': 'your_password',
+#        'HOST': 'localhost',
+#        'PORT': '5432',
+#    }
+#}
