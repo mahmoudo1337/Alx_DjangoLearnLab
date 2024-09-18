@@ -23,9 +23,9 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = 'django-insecure-sh3&mu6pcyr-d&h5d83f#h1j23^h(w@86ab(@80l0jwg%^6p+7'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['yourdomain.com', 'www.yourdomain.com']
 
 
 # Application definition
@@ -136,3 +136,25 @@ REST_FRAMEWORK = {
     'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.PageNumberPagination',
     'PAGE_SIZE': 10,  # Adjust as needed
 }
+
+SECURE_BROWSER_XSS_FILTER = True
+X_FRAME_OPTIONS = 'DENY'
+SECURE_CONTENT_TYPE_NOSNIFF = True
+SECURE_SSL_REDIRECT = True  # Redirect HTTP to HTTPS (only if HTTPS is enabled)
+
+# Add the domain of your production database or setup proper database settings:
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': 'your_db_name',
+        'USER': 'your_db_user',
+        'PASSWORD': 'your_db_password',
+        'HOST': 'your_db_host',  # Could be localhost or cloud service
+        'PORT': 'your_db_port',
+    }
+}
+
+# In settings.py
+import os
+
+SECRET_KEY = os.getenv('DJANGO_SECRET_KEY', 'default-secret-key')
