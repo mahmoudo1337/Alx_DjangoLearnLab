@@ -7,6 +7,10 @@
     <link rel="stylesheet" href="{% static 'css/styles.css' %}">
 </head>
 <body>
+    <form method="GET" action="{% url 'search' %}">
+    <input type="text" name="q" placeholder="Search...">
+    <button type="submit">Search</button>
+</form>
     <header>
         <nav>
             <ul>
@@ -17,7 +21,10 @@
             </ul>
         </nav>
     </header>
-
+    <form method="GET" action="{% url 'search' %}">
+        <input type="text" name="q" placeholder="Search...">
+        <button type="submit">Search</button>
+    </form>
     <div class="content">
         {% block content %}
         <!-- Page-specific content goes here -->

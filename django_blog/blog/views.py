@@ -36,11 +36,19 @@ from .models import Post
 from .forms import PostForm
 
 # ListView to display all blog posts
+from taggit.models import Tag
+
 class PostListView(ListView):
     model = Post
     template_name = 'blog/post_list.html'
     context_object_name = 'posts'
-    ordering = ['-published_date']  # Latest posts first
+    ordering = ['-published_date']
+
+    def get_queryset(self):
+        tag_slug = self.kwargs.get('tag_slug')
+        if tag_slug:
+            return Post.objects.filter(tags__slug=tag_slug).distinct()
+        return super().get_queryset()
 
 # DetailView to display a single blog post
 class PostDetailView(DetailView):
@@ -129,3 +137,18 @@ class CommentDeleteView(LoginRequiredMixin, UserPassesTestMixin, DeleteView):
     def test_func(self):
         comment = self.get_object()
         return self.request.user == comment.author
+# blog/views.py
+
+from django.db.models import Q
+from .models import Post
+
+def search(request):
+    query = request.GET.get('q')
+    results = []
+    if query:
+        results = Post.objects.filter(
+            Q(title__icontains=query) |
+            Q(content__icontains=query) |
+            Q(tags__name__icontains=query)
+        ).distinct()
+    return render(request, 'blog/search_results.html', {'query': query, 'results': results})

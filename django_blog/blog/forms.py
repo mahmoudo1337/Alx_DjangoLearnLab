@@ -23,11 +23,16 @@ class RegistrationForm(UserCreationForm):
 from django import forms
 from .models import Post
 
+from taggit.forms import TagWidget
+
 class PostForm(forms.ModelForm):
     class Meta:
         model = Post
-        fields = ['title', 'content']  # Include fields for title and content only
-
+        fields = ['title', 'content', 'tags']  # Include tags field
+        widgets = {
+            'content': forms.Textarea(attrs={'rows': 5}),
+            'tags': TagWidget(),  # Widget for tagging
+        }
 # blog/forms.py
 
 from django import forms
