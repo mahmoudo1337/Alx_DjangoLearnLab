@@ -3,7 +3,6 @@
 from rest_framework import serializers
 from .models import CustomUser
 from django.contrib.auth import authenticate
-from rest_framework.authtoken.models import Token
 
 class RegisterSerializer(serializers.ModelSerializer):
     class Meta:
@@ -31,7 +30,3 @@ class LoginSerializer(serializers.Serializer):
         if user and user.is_active:
             return user
         raise serializers.ValidationError("Invalid Credentials")
-
-
-#Token.objects.create
-#get_user_model().objects.create_user
