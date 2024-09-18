@@ -17,3 +17,13 @@ class RegistrationForm(UserCreationForm):
         if commit:
             user.save()
         return user
+    
+# blog/forms.py
+
+from django import forms
+from .models import Post
+
+class PostForm(forms.ModelForm):
+    class Meta:
+        model = Post
+        fields = ['title', 'content']  # Include fields for title and content only
